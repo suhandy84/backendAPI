@@ -150,5 +150,19 @@ module.exports = {
             if (err) res.status(500).send(err)
             return res.status(200).send(result)
         })
+    },
+    filterproducts: (req, res) => {
+        const {id}=req.params
+        var sql = `select p.*,c.idcategory as idcat,c.name as catname
+                    from products p join categories c on p.idcategory=c.idcategory
+                    where p.isdeleted=0 and p.idcategory=${id}`
+        db.query(sql, (err, product) => {
+            if (err) res.status(500).send(err)
+            sql = `select idcategory,name from categories`
+            db.query(sql, (err, category) => {
+                if (err) res.status(500).send(err)
+                return res.send({ product, category })
+            })
+        })
     }
 }
