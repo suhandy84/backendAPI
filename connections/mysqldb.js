@@ -4,7 +4,7 @@ const db=mysql.createConnection({
     host:'localhost',
     user:'handy',
     password:'suhand13712',//dari workbench
-    database:'tugas_akhir',
+    database:'final_product',
     port:'3306'
 })
 

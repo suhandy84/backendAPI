@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:false}))//buat user kirim data ke server
 app.use(express.static('public'))
 app.use(bearertoken())
 
-const {authRouters, productRouters} =require('./routers')
+const {authRouters, productRouters, discountRouters} =require('./routers')
 
 app.get('/',(req, res)=>{
     return res.send('<h1>Selamat Datang</h1>')
@@ -20,6 +20,7 @@ app.get('/',(req, res)=>{
 
 app.use('/users',authRouters)
 app.use('/product',productRouters)
+app.use('/discount',discountRouters)
 
 
 
