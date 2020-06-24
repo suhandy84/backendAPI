@@ -491,49 +491,13 @@ module.exports = {
     },
     filterproductspage: (req, res) => {
         const { id } = req.params
-        // const { discount } = req.query
-        // if (discount == 1) {
-        //     var sql = `select p.*,c.idcategory as idcat,c.name as catname, d.*, a.*, f.* from products p 
-        //                 join categories c on p.idcategory=c.idcategory
-        //                 join discounts d on p.discount_id=d.discount_id
-        //                 join authors a on p.author_id=a.author_id
-        //                 join booksformat f on p.format_id=f.format_id
-        //                 where p.isdeleted=0 and d.discount_rate>0`
-        //     db.query(sql, (err, product) => {
-        //         if (err) res.status(500).send(err)
-        //         sql = `select idcategory,name from categories`
-        //         db.query(sql, (err, category) => {
-        //             if (err) res.status(500).send(err)
-        //             // return res.send({ product, category })
-        //             const { page } = req.query
-        //             const offset = parseInt((page - 1) * 8)
-        //             var sql = `select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
-        //                                     join categories c on p.idcategory=c.idcategory
-        //                                     join authors a on p.author_id=a.author_id
-        //                                     join booksformat f on p.format_id=f.format_id
-        //                                     where p.isdeleted=0 and p.idcategory=${id}
-        //                                     LIMIT ${offset},8`
-        //             db.query(sql, (err1, result) => {
-        //                 if (err1) res.status(500).send({ err1, message: 'error get total filter product' })
-        //                 // return res.send(result)
-        //                 sql = `select discount_id,type from discounts where isdeleted=0 order by type`
-        //                 db.query(sql, (err, discount) => {
-        //                     if (err) res.status(500).send(err)
-        //                     return res.send({ product, category, result, discount })
-        //                 })
-        //                 // return res.send({ product, category, result })
-        //             })
-        //         })
-        //     })
-        // }else {
-
         // const { page } = req.query
         // const offset = parseInt((page - 1) * 8)
         var sql = `select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
-                        join categories c on p.idcategory=c.idcategory
-                        join authors a on p.author_id=a.author_id
-                        join booksformat f on p.format_id=f.format_id
-                        where p.isdeleted=0 and p.idcategory=${id}`
+                    join categories c on p.idcategory=c.idcategory
+                    join authors a on p.author_id=a.author_id
+                    join booksformat f on p.format_id=f.format_id
+                    where p.isdeleted=0 and p.idcategory=${id}`
         db.query(sql, (err, product) => {
             if (err) res.status(500).send(err)
             sql = `select idcategory,name from categories`
@@ -543,11 +507,11 @@ module.exports = {
                 const { page } = req.query
                 const offset = parseInt((page - 1) * 8)
                 var sql = `select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
-                                join categories c on p.idcategory=c.idcategory
-                                join authors a on p.author_id=a.author_id
-                                join booksformat f on p.format_id=f.format_id
-                                where p.isdeleted=0 and p.idcategory=${id}
-                                LIMIT ${offset},8`
+                            join categories c on p.idcategory=c.idcategory
+                            join authors a on p.author_id=a.author_id
+                            join booksformat f on p.format_id=f.format_id
+                            where p.isdeleted=0 and p.idcategory=${id}
+                            LIMIT ${offset},8`
                 db.query(sql, (err1, result) => {
                     if (err1) res.status(500).send({ err1, message: 'error get total filter product' })
                     // return res.send(result)
@@ -560,40 +524,16 @@ module.exports = {
                 })
             })
         })
-        // }
     },
     filterproducts: (req, res) => {
         const { id } = req.params
-        // const { discount } = req.query
-        // if (discount == 1) {
-        //     var sql = `select p.*,c.idcategory as idcat,c.name as catname, d.*, a.*, f.* from products p 
-        //                 join categories c on p.idcategory=c.idcategory
-        //                 join discounts d on p.discount_id=d.discount_id
-        //                 join authors a on p.author_id=a.author_id
-        //                 join booksformat f on p.format_id=f.format_id
-        //                 where p.isdeleted=0 and d.discount_rate>0`
-        //     db.query(sql, (err, product) => {
-        //         if (err) res.status(500).send(err)
-        //         sql = `select idcategory,name from categories`
-        //         db.query(sql, (err, category) => {
-        //             if (err) res.status(500).send(err)
-        //             // return res.send({ product, category })
-        //             sql = `select discount_id,type from discounts where isdeleted=0 order by type`
-        //             db.query(sql, (err, discount) => {
-        //                 if (err) res.status(500).send(err)
-        //                 return res.send({ product, category, discount })
-        //             })
-        //         })
-        //     })
-        // } else {
-
         // const { page } = req.query
         // const offset = parseInt((page - 1) * 8)
         var sql = `select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
-                        join categories c on p.idcategory=c.idcategory
-                        join authors a on p.author_id=a.author_id
-                        join booksformat f on p.format_id=f.format_id
-                        where p.isdeleted=0 and p.idcategory=${id}`
+                    join categories c on p.idcategory=c.idcategory
+                    join authors a on p.author_id=a.author_id
+                    join booksformat f on p.format_id=f.format_id
+                    where p.isdeleted=0 and p.idcategory=${id}`
         db.query(sql, (err, product) => {
             if (err) res.status(500).send(err)
             sql = `select idcategory,name from categories`
@@ -607,51 +547,14 @@ module.exports = {
                 })
             })
         })
-        // }
     },
-    filterdiscountproducts: (req, res) => {
-        const { page, sortname, sortprice } = req.query
-        if (sortname == 1) {
-            var sql = `select p.*,c.idcategory as idcat,c.name as catname, d.*, a.*, f.* from products p 
-                        join categories c on p.idcategory=c.idcategory
-                        join discounts d on p.discount_id=d.discount_id
-                        join authors a on p.author_id=a.author_id
-                        join booksformat f on p.format_id=f.format_id
-                        where p.isdeleted=0 and d.discount_rate>0 order by p.name desc
-                        LIMIT ${page},8`
-        } else if (sortname == 2) {
-            var sql = `select p.*,c.idcategory as idcat,c.name as catname, d.*, a.*, f.* from products p 
-                        join categories c on p.idcategory=c.idcategory
-                        join discounts d on p.discount_id=d.discount_id
-                        join authors a on p.author_id=a.author_id
-                        join booksformat f on p.format_id=f.format_id
-                        where p.isdeleted=0 and d.discount_rate>0 order by p.name
-                        LIMIT ${page},8`
-        } else if (sortprice == 1) {
-            var sql = `select p.*,c.idcategory as idcat,c.name as catname, d.*, a.*, f.* from products p 
-                        join categories c on p.idcategory=c.idcategory
-                        join discounts d on p.discount_id=d.discount_id
-                        join authors a on p.author_id=a.author_id
-                        join booksformat f on p.format_id=f.format_id
-                        where p.isdeleted=0 and d.discount_rate>0 order by p.price desc
-                        LIMIT ${page},8`
-        } else if (sortprice == 2) {
-            var sql = `select p.*,c.idcategory as idcat,c.name as catname, d.*, a.*, f.* from products p 
-                        join categories c on p.idcategory=c.idcategory
-                        join discounts d on p.discount_id=d.discount_id
-                        join authors a on p.author_id=a.author_id
-                        join booksformat f on p.format_id=f.format_id
-                        where p.isdeleted=0 and d.discount_rate>0 order by p.price
-                        LIMIT ${page},8`
-        } else {
-            var sql = `select p.*,c.idcategory as idcat,c.name as catname, d.*, a.*, f.* from products p 
-                        join categories c on p.idcategory=c.idcategory
-                        join discounts d on p.discount_id=d.discount_id
-                        join authors a on p.author_id=a.author_id
-                        join booksformat f on p.format_id=f.format_id
-                        where p.isdeleted=0 and d.discount_rate>0
-                        LIMIT ${page},8`
-        }
+    filterdiscountproducts : (req,res) => {
+        var sql = `select p.*,c.idcategory as idcat,c.name as catname,d.discount_id as iddisc,d.type as disctype,a. *, f.* from products p 
+                    join categories c on p.idcategory=c.idcategory
+                    join discounts d on p.discount_id=d.discount_id
+                    join authors a on p.author_id=a.author_id
+                    join booksformat f on p.format_id=f.format_id
+                    where p.isdeleted=0`
         db.query(sql, (err, product) => {
             if (err) res.status(500).send(err)
             sql = `select idcategory,name from categories`
@@ -661,18 +564,7 @@ module.exports = {
                 sql = `select discount_id,type from discounts where isdeleted=0 order by type`
                 db.query(sql, (err, discount) => {
                     if (err) res.status(500).send(err)
-                    // return res.send({ product, category, discount })
-                    var sql = `  SELECT COUNT(idproduct) AS total from products p 
-                            
-                            join discounts d on p.discount_id=d.discount_id
-                            
-                            where p.isdeleted=0 and d.discount_rate>0`
-                    db.query(sql, (err, result) => {
-                        if (err) res.status(500).send({ err, message: 'error get total discount product' })
-                        // return res.send(result[0])
-                        return res.send({ product, category, discount, result })
-
-                    })
+                    return res.send({ product, category, discount })
                 })
             })
         })
@@ -681,48 +573,32 @@ module.exports = {
     // ============= User ============= //
 
     getProductUser: (req, res) => {
-        const { page, sortname, sortprice } = req.query
+        const { page, sortname } = req.query
         // const offset = parseInt((page - 1) * 8)
-        if (sortname == 2) {
+        if (sortname == 1) {
             var sql = `select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
                             join categories c on p.idcategory=c.idcategory
                             join authors a on p.author_id=a.author_id
                             join booksformat f on p.format_id=f.format_id
                             where p.isdeleted=0 order by p.name desc
                             LIMIT ${page},8`
-        } else if (sortname == 1) {
+            db.query(sql, (err, result) => {
+                if (err) res.status(500).send({ err, message: 'error get total product' })
+                return res.send(result)
+            })
+
+        } else {
             var sql = `select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
                             join categories c on p.idcategory=c.idcategory
                             join authors a on p.author_id=a.author_id
                             join booksformat f on p.format_id=f.format_id
                             where p.isdeleted=0 order by p.name
                             LIMIT ${page},8`
-        } else if (sortprice == 2) {
-            var sql = `select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
-                            join categories c on p.idcategory=c.idcategory
-                            join authors a on p.author_id=a.author_id
-                            join booksformat f on p.format_id=f.format_id
-                            where p.isdeleted=0 order by p.price desc
-                            LIMIT ${page},8`
-        } else if (sortprice == 1) {
-            var sql = `select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
-                            join categories c on p.idcategory=c.idcategory
-                            join authors a on p.author_id=a.author_id
-                            join booksformat f on p.format_id=f.format_id
-                            where p.isdeleted=0 order by p.price
-                            LIMIT ${page},8`
-        } else {
-            var sql = `select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
-                            join categories c on p.idcategory=c.idcategory
-                            join authors a on p.author_id=a.author_id
-                            join booksformat f on p.format_id=f.format_id
-                            where p.isdeleted=0
-                            LIMIT ${page},8`
+            db.query(sql, (err, result) => {
+                if (err) res.status(500).send({ err, message: 'error get total product' })
+                return res.send(result)
+            })
         }
-        db.query(sql, (err, result) => {
-            if (err) res.status(500).send({ err, message: 'error get total product' })
-            return res.send(result)
-        })
     },
 
     getAllProductUser: (req, res) => {
@@ -778,10 +654,9 @@ module.exports = {
     //     // }
     // },
     gettotalproduk: (req, res) => {
-        const { discount } = req.query
         var sql = `  SELECT COUNT(idproduct) AS total
-                            FROM products p
-                            WHERE p.isdeleted=0`
+                        FROM products p
+                        WHERE p.isdeleted=0`
         db.query(sql, (err, result) => {
             if (err) res.status(500).send({ err, message: 'error get total product' })
             return res.send(result[0])
