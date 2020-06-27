@@ -488,7 +488,7 @@ module.exports = {
                     left join discounts d on p.discount_id=d.discount_id
                     join authors a on p.author_id=a.author_id
                     join booksformat f on p.format_id=f.format_id
-                    where p.isdeleted=0 and p.idcategory=1  order by p.createat desc limit 5`
+                    where p.isdeleted=0 and p.idcategory=1  order by p.createat limit 5`
             db.query(sql, (err, komik) => {
                 if (err) res.status(500).send(err)
                 return res.send({ novel, komik })
