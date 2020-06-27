@@ -6,6 +6,7 @@ const {auth}=require('./../helper/jwtauth')
 const router=express.Router()
 
 router.get('/category',Productcontrollers.getcategory)
+router.get('/discount',Productcontrollers.getdiscount)
 router.post('/addprod',auth,Productcontrollers.addproducts)
 router.get('/getprod',Productcontrollers.getproducts)
 router.delete('/deleteprod/:id',Productcontrollers.deleteproducts)
@@ -22,6 +23,7 @@ router.get('/searchproduct',Productcontrollers.getsearchproduct)
 // router.get('/getallproduct',Productcontrollers.getAllProductUser)
 router.get('/totalproduct',Productcontrollers.getTotalProduct)
 router.get('/getdetailprod/:id',Productcontrollers.getdetailproduk)
+router.get('/getdiscountprod/:id',Productcontrollers.getdiscountproduct)
 
 
 module.exports=router

@@ -15,7 +15,7 @@ module.exports = {
             db.query(sql, (err, category) => {
                 if (err) res.status(500).send(err)
                 // return res.send({ product, category })
-                sql = `select discount_id,type from discounts where isdeleted=0 order by type`
+                sql = `select discount_id,type,image from discounts where isdeleted=0 order by type`
                 db.query(sql, (err, discount) => {
                     if (err) res.status(500).send(err)
                     return res.send({ product, category, discount })
@@ -474,16 +474,36 @@ module.exports = {
         })
     },
     getproductshome: (req, res) => {
-        var sql = `select p.*,c.idcategory as idcat,c.name as catname
-                    from products p join categories c on p.idcategory=c.idcategory
-                    where p.isdeleted=0`
-        db.query(sql, (err, product) => {
+        // const { novel, komik } = req.query
+        var sql = `select p.*,c.idcategory as idcat,c.name as catname, d.discount_rate, a.*, f.* from products p 
+                    join categories c on p.idcategory=c.idcategory
+                    left join discounts d on p.discount_id=d.discount_id
+                    join authors a on p.author_id=a.author_id
+                    join booksformat f on p.format_id=f.format_id
+                    where p.isdeleted=0 and p.idcategory=2  order by p.createat desc limit 5`
+        db.query(sql, (err, novel) => {
             if (err) res.status(500).send(err)
-            res.send(product)
+            sql = `select p.*,c.idcategory as idcat,c.name as catname, d.discount_rate, a.*, f.* from products p 
+                    join categories c on p.idcategory=c.idcategory
+                    left join discounts d on p.discount_id=d.discount_id
+                    join authors a on p.author_id=a.author_id
+                    join booksformat f on p.format_id=f.format_id
+                    where p.isdeleted=0 and p.idcategory=1  order by p.createat desc limit 5`
+            db.query(sql, (err, komik) => {
+                if (err) res.status(500).send(err)
+                return res.send({ novel, komik })
+            })
         })
     },
     getcategory: (req, res) => {
         var sql = `select idcategory,name from categories`
+        db.query(sql, (err, result) => {
+            if (err) res.status(500).send(err)
+            return res.status(200).send(result)
+        })
+    },
+    getdiscount: (req, res) => {
+        var sql = `select discount_id from discounts`
         db.query(sql, (err, result) => {
             if (err) res.status(500).send(err)
             return res.status(200).send(result)
@@ -1420,8 +1440,9 @@ module.exports = {
         //             return res.send(result)
         //         })
         // } else {
-        var sql = `  select p.*,c.idcategory as idcat,c.name as catname,a.*, f.* from products p 
+        var sql = `  select p.*,c.idcategory as idcat,c.name as catname, d.discount_rate, a.*, f.* from products p 
                                  join categories c on p.idcategory=c.idcategory
+                                 left join discounts d on p.discount_id=d.discount_id
                                  join authors a on p.author_id=a.author_id
                                  join booksformat f on p.format_id=f.format_id
                                  where p.isdeleted=0 AND p.name like '%${nama}%'`
@@ -1575,5 +1596,21 @@ module.exports = {
             if (err) res.status(500).send({ err, message: 'error get total product' })
             return res.send(result)
         })
-    }
+    },
+    getdiscountproduct: (req, res) => {
+        console.log(req.params)
+        const { id } = req.params
+        // const offset = parseInt((page-1)*8)
+        var sql = `select p.*,c.idcategory as idcat,c.name as catname, d.discount_id, d.discount_rate, a.*, f.* from products p 
+                            join categories c on p.idcategory=c.idcategory
+                            join discounts d on p.discount_id=d.discount_id
+                            join authors a on p.author_id=a.author_id
+                            join booksformat f on p.format_id=f.format_id
+                            where p.isdeleted=0 and p.discount_id=${id} order by p.name
+                            `
+        db.query(sql, (err, result) => {
+            if (err) res.status(500).send({ err, message: 'error get total product' })
+            return res.send(result)
+        })
+    },
 }
